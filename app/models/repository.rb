@@ -21,11 +21,11 @@ class Repository
 
   def url=(value)
     @url = value
-    @name = parse_name_from_url(value)
+    @name = parse_name_from_url
   end
 
   def status_text
-    'some status'
+    ''
   end
 
   def to_param
@@ -34,7 +34,11 @@ class Repository
 
   private
 
-  def parse_name_from_url(value)
-    'name'
+  def parse_name_from_url
+    uri = URI @url
+    nodes = uri.path.split '/'
+    "#{nodes[1]} - #{nodes[2]}"
+  rescue
+    'no name!'
   end
 end
