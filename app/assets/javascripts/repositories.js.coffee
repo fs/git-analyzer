@@ -28,5 +28,19 @@ jQuery ->
       ]
     ]
   )
+
   graph.renderer.unstack = true
   graph.render()
+  legend = new Rickshaw.Graph.Legend(
+    graph: graph
+    element: document.querySelector('#main_graph')
+  )
+  shelving = new Rickshaw.Graph.Behavior.Series.Toggle(
+    graph: graph
+    legend: legend
+  )
+  yAxis = new Rickshaw.Graph.Axis.Y(
+    graph: graph
+    tickFormat: Rickshaw.Fixtures.Number.formatKMBT
+  )
+  yAxis.render()
