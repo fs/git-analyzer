@@ -1,0 +1,22 @@
+<% title 'Let me analyze you repo' %>
+
+<%= form_for Repository.new do |f| %>
+  <fieldset id="repo_new" class="content-form">
+    <ul class="line">
+      <li class="field string required">
+        <%= f.label :url %>
+        <%= f.text_field :url %>
+      </li>
+
+      <li class="field string required">
+        <%= f.label :time_zone %>
+        <%= f.time_zone_select :time_zone, nil, default: 'Moscow' %>
+      </li>
+
+      <li class="field string required">
+        <%= f.label :workday_start %>
+        <%= f.select :workday_start, 0..23, {selected: '11'} %>
+      </li>
+    </ul>
+  </fieldset>
+<% end %>

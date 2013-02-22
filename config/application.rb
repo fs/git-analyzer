@@ -46,6 +46,7 @@ module Rails3Base
     # This is necessary if your schema can't be completely dumped by the schema dumper,
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
+    config.active_record.default_timezone = :local
 
     # Enforce whitelist mode for mass assignment.
     # This will create an empty whitelist of attributes available for mass-assignment for all models
@@ -65,15 +66,15 @@ module Rails3Base
     # Application specific options
     #
     # Name used in the html titles and mailers
-    config.app_name = "Rails 3 Base example site"
+    config.app_name = "Git Analyzer"
 
     # Slim engine default option, initializers/slim.rb
     config.slim_options = {}
 
     # Default e-mail address which will be shown in the "from" devise emails, initializers/devise.rb,
-    config.noreply = "noreply@fs-rails3-base.heroku.com"
+    config.noreply = "noreply@git-analyzer.heroku.com"
 
     # Default host for action mailer, initializers/mailer.rb
-    config.host = "localhost:5000"
+    config.host = "localhost:3000"
   end
 end
