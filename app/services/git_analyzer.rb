@@ -9,7 +9,7 @@ class GitAnalyzer
     @owner = nodes[1]
     @repo = nodes[2]
     @time_zone = time_zone
-    @workday_start = workday_start
+    @_start = workday_start
     if Net::HTTP.new(@host).head("/#{@owner}/#{@repo}").code.to_i == 404
       raise 'Page is not found'
     end
@@ -39,14 +39,14 @@ class GitAnalyzer
   def worktime_commits
     commits.select do |commit|
       date = date_for commit
-      date.hour >= 11 && date.hour < 20 && WEEKEND.values.exclude?(date.wday)
+      date.hour >= 7 && date.hour < 16 && WEEKEND.values.exclude?(date.wday)
     end
   end
 
   def unworktime_commits
     commits.reject do |commit|
       date = date_for commit
-      date.hour >= 11 && date.hour < 20 && WEEKEND.values.exclude?(date.wday)
+      date.hour >= 7 && date.hour < 16 && WEEKEND.values.exclude?(date.wday)
     end
   end
 
