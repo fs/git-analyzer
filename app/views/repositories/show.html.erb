@@ -1,0 +1,10 @@
+<% title "Your repo #{@repo.name}" %>
+
+<div id="main_graph" data-worktime="<%= @worktime[0] %>" data-unworktime="<%= @worktime[1] %>" data-overtime="<%= @overtime[0] %>" data-weekend="<%= @overtime[1] %>">
+  <div><%= @repo.status_text %>
+</div>
+
+<div class="graphs">
+  <div id="unusual_graph"></div>
+  <div id="usual_graph"></div>
+</div>

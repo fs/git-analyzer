@@ -3,15 +3,10 @@ class Repository
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_reader :name, :attributes, :records
-  attr_accessor :url, :time_zone, :workday_start
+  attr_reader :url, :name, :attributes
+  attr_accessor :time_zone, :workday_start
 
   validates :url, presence: true
-
-  def self.field(name)
-    define_method(name) { @attributes[name] }
-    define_method("#{name}=") {|value| @attributes[name] = value }
-  end
 
   def initialize(attributes = {})
     @attributes = {}
@@ -22,5 +17,24 @@ class Repository
 
   def persisted?
     false
+  end
+
+  def url=(value)
+    @url = value
+    @name = parse_name_from_url(value)
+  end
+
+  def status_text
+    'some status'
+  end
+
+  def to_param
+    @name.parameterize
+  end
+
+  private
+
+  def parse_name_from_url(value)
+    'name'
   end
 end

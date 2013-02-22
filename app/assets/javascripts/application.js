@@ -8,4 +8,5 @@
 //= require jquery_ujs
 //= require twitter/bootstrap/alert
 //= require twitter/bootstrap/dropdown
+//= require rickshaw_with_d3
 //= require_tree .

@@ -27,6 +27,7 @@ gem 'thin'
 gem 'airbrake'
 gem 'ghee'
 gem 'httparty'
+gem 'rickshaw_rails'
 
 gem 'github-markdown' # only for dashboard controller
 
