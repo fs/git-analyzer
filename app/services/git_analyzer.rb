@@ -2,9 +2,9 @@ class GitAnalyzer
 
   WEEKEND = { saturday: 6, sunday: 0 }
 
-  def initialize(url, time_zone, workday_start)
+  def initialize url, time_zone, workday_start
     uri = URI url
-    nodes = uri.path.split('/')
+    nodes = uri.path.split '/'
     @host = uri.host
     @owner = nodes[1]
     @repo = nodes[2]
@@ -13,32 +13,51 @@ class GitAnalyzer
     if Net::HTTP.new(@host).head("/#{@owner}/#{@repo}").code.to_i == 404
       raise 'Page is not found'
     end
-    @gs = Ghee.basic_auth 'login', 'password'
+    @gs = Ghee.access_token 'dc7d9f2ca0a00a453fba36e75c07c22a45359932'
   rescue
     'URL is invalid'
   end
 
-  def worktime_commits
-    commits = gs.repos(@owner, @repo).commits
-    worktime_commits = commits.select do |commit|
-      date = commit.commit.author.date.to_time
-      date.hour < 20 && WEEKEND.values.exclude?(date.wday)
-    end
-    unworktime_commits = commits - worktime_commits
+  def work2unwork
     [worktime_commits.count, unworktime_commits.count]
   end
 
-  def unworktime_commits
-    commits = gs.repos(@owner, @repo).commits
-    unworktime_commits = commits.reject do |commit|
-      date = commit.commit.author.date.to_time
+  def over2weekend
+    [overtime_commits.count, weekend_commits.count]
+  end
+
+  private
+
+  def commits
+    @commits ||= @gs.repos(@owner, @repo).commits
+  end
+
+  def date_for commit
+    commit.commit.author.date.to_time
+  end
+
+  def worktime_commits
+    @commits.select do |commit|
+      date = date_for commit
       date.hour < 20 && WEEKEND.values.exclude?(date.wday)
     end
-    weekend_commits = unworktime_commits do |commit|
-      date = commit.commit.author.date.to_time
+  end
+
+  def unworktime_commits
+    @commits.reject do |commit|
+      date = date_for commit
+      date.hour < 20 && WEEKEND.values.exclude?(date.wday)
+    end
+  end
+
+  def weekend_commits
+    unworktime_commits.select do |commit|
+      date = date_for commit
       WEEKEND.values.include? date.wday
     end
-    overtime_commits = unworktime_commits - weekend_commits
-    [overtime_commits.count, unworktime_commits.count]
+  end
+
+  def overtime_commits
+    unworktime_commits - weekend_commits
   end
 end
