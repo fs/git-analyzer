@@ -37,14 +37,14 @@ class GitAnalyzer
   end
 
   def worktime_commits
-    @commits.select do |commit|
+    commits.select do |commit|
       date = date_for commit
       date.hour < 20 && WEEKEND.values.exclude?(date.wday)
     end
   end
 
   def unworktime_commits
-    @commits.reject do |commit|
+    commits.reject do |commit|
       date = date_for commit
       date.hour < 20 && WEEKEND.values.exclude?(date.wday)
     end
