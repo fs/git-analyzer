@@ -3,10 +3,16 @@ class RepositoriesController < ApplicationController
   end
 
   def create
-    @repo = Repository.new(params[:repository])
-    @analyzer = GitAnalyzer.new(@repo.url, @repo.time_zone, @repo.workday_start)
-    @worktime = @analyzer.work2unwork
-    @overtime = @analyzer.over2weekend
-    render :show
+    @repo = Repository.find_or_initialize_by_url(params[:repository].delete(:url))
+    if @repo.update_attributes(params[:repository])
+      redirect_to repository_path(@repo)
+    else
+      render :new
+    end
+  end
+
+  def show
+    @repo = Repository.find_by_name(params[:id])
+    @analyzer = GitAnalyzer.new(@repo)
   end
 end

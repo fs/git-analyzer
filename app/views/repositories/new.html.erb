@@ -9,15 +9,20 @@
       </li>
 
       <li class="field string required">
-        <%= f.label :time_zone %>
-        <%= f.time_zone_select :time_zone, nil, default: 'Moscow' %>
+        <%= f.label :timezone %>
+        <%= f.time_zone_select :timezone, nil, default: 'Moscow' %>
       </li>
 
       <li class="field string required">
         <%= f.label :workday_start %>
         <%= f.select :workday_start, 0..23, {selected: '11'} %>
       </li>
+
+      <li class="field string required">
+        <%= f.label :workday_end %>
+        <%= f.select :workday_end, 0..23, {selected: '20'} %>
+      </li>
     </ul>
   </fieldset>
-  <%= f.submit 'Do it!' %>
+  <%= f.submit 'Ok, do it!' %>
 <% end %>

@@ -1,15 +1,16 @@
 class GitAnalyzer
-
   WEEKEND = { saturday: 6, sunday: 0 }
 
-  def initialize url, time_zone, workday_start
-    uri = URI url
+  def initialize repo
+    uri = URI repo.url
     nodes = uri.path.split '/'
     @host = uri.host
     @owner = nodes[1]
     @repo = nodes[2]
-    @time_zone = time_zone
-    @_start = workday_start
+    @time_zone = repo.timezone
+    @_start = repo.workday_start
+    @_end = repo.workday_end
+
     if Net::HTTP.new(@host).head("/#{@owner}/#{@repo}").code.to_i == 404
       raise 'Page is not found'
     end
