@@ -198,8 +198,6 @@ GEM
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
-    rickshaw_rails (0.0.4)
-      railties (>= 3.1.0)
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
@@ -319,7 +317,6 @@ DEPENDENCIES
   quiet_assets
   rails (= 3.2.11)
   rails_best_practices
-  rickshaw_rails
   rspec-rails
   shoulda-matchers
   simple-navigation

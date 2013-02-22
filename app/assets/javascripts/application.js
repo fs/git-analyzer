@@ -8,5 +8,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap/alert
 //= require twitter/bootstrap/dropdown
-//= require rickshaw_with_d3
+//= require rafael.min
+//= require morris.min
 //= require_tree .

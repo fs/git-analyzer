@@ -3,44 +3,19 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  graph = new Rickshaw.Graph(
-    element: document.querySelector("#main_graph")
-    renderer: 'bar'
-    width: 600
-    height: 200
-    series: [
-      color: "steelblue"
-      data: [
-        x: 0
-        y: $('#main_graph').data('worktime')
-      ,
-        x: 1
-        y: $('#main_graph').data('overtime')
-      ]
-    ,
-      color: "lightblue"
-      data: [
-        x: 0
-        y: $('#main_graph').data('unworktime')
-      ,
-        x: 1
-        y: $('#main_graph').data('weekend')
-      ]
+  Morris.Bar
+    element: "main_graph"
+    data: [
+      y: "Commits"
+      a: $("#main_graph").data('worktime')
+      b: $("#main_graph").data('offtime')
     ]
-  )
-
-  graph.renderer.unstack = true
-  graph.render()
-  legend = new Rickshaw.Graph.Legend(
-    graph: graph
-    element: document.querySelector('#main_graph')
-  )
-  shelving = new Rickshaw.Graph.Behavior.Series.Toggle(
-    graph: graph
-    legend: legend
-  )
-  yAxis = new Rickshaw.Graph.Axis.Y(
-    graph: graph
-    tickFormat: Rickshaw.Fixtures.Number.formatKMBT
-  )
-  yAxis.render()
+    xkey: "y"
+    ykeys: ["a", "b"]
+    labels: ["Work time", "Off time"]
+    hideHover: 'auto'
+    barColors: [
+      "green"
+    ,
+      "red"
+    ]
