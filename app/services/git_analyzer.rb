@@ -29,7 +29,7 @@ class GitAnalyzer
   private
 
   def commits
-    @commits ||= @gs.repos(@owner, @repo).commits
+    @commits ||= @gs.repos(@owner, @repo).commits.paginate(per_page: 100000, page: 1)
   end
 
   def date_for commit
@@ -39,14 +39,14 @@ class GitAnalyzer
   def worktime_commits
     commits.select do |commit|
       date = date_for commit
-      date.hour < 20 && WEEKEND.values.exclude?(date.wday)
+      date.hour >= 11 && date.hour < 20 && WEEKEND.values.exclude?(date.wday)
     end
   end
 
   def unworktime_commits
     commits.reject do |commit|
       date = date_for commit
-      date.hour < 20 && WEEKEND.values.exclude?(date.wday)
+      date.hour >= 11 && date.hour < 20 && WEEKEND.values.exclude?(date.wday)
     end
   end
 
