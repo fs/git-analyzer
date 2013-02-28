@@ -1,5 +1,9 @@
 <% title "Your repo #{@repo.name}" %>
 
-<div id="main_graph" data-worktime="<%= @analyzer.work2unwork[0] %>" data-offtime="<%= @analyzer.work2unwork[1] %>" data-overtime="<%= @analyzer.over2weekend[0] %>" data-weekend="<%= @analyzer.over2weekend[1] %>">
-  <div><%= @repo.status_text %>
+<div id="main_graph" data-worktime="<%= @analyzer.work2unwork[0] %>" data-offtime="<%= @analyzer.work2unwork[1] %>" style="width:400px;">
 </div>
+
+<div id="offtime_graph" data-overtime="<%= @analyzer.over2weekend[0] %>" data-weekend="<%= @analyzer.over2weekend[1] %>" style="width:400px;">
+</div>
+
+<div><%= @repo.status_text %></div>

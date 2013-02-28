@@ -19,3 +19,20 @@ jQuery ->
     ,
       "red"
     ]
+
+  Morris.Bar
+    element: "offtime_graph"
+    data: [
+      y: "Commits"
+      a: $("#offtime_graph").data('overtime')
+      b: $("#offtime_graph").data('weekend')
+    ]
+    xkey: "y"
+    ykeys: ["a", "b"]
+    labels: ["Overtime", "Weekend"]
+    hideHover: 'auto'
+    barColors: [
+      "#CC0000"
+    ,
+      "#990000"
+    ]

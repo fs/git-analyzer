@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
 gem 'json'
@@ -41,7 +41,7 @@ end
 group :development, :test do
   gem 'debugger'
   gem 'dotenv'
-  gem 'sqlite3'
+  gem 'sqlite3', '1.3.6'
   gem 'rspec-rails'
   gem 'mail_safe'
   gem 'rails_best_practices'
